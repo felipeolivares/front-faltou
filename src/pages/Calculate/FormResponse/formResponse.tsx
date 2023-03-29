@@ -33,14 +33,13 @@ const FormResponse: React.FC = () => {
       .then((response: any) => {
         setSubjects(response.data);
       })
-      .catch((error: any) => {
+      .catch(() => {
         toast.error(
           "Erro ao buscar as matérias, entre no sistema novamente mais tarde!",
           {
             position: toast.POSITION.BOTTOM_RIGHT,
           }
         );
-        console.error(error);
       });
   };
 
@@ -64,18 +63,17 @@ const FormResponse: React.FC = () => {
     scrollUp();
     setOpenModal(false);
     subjectService
-      .deleteSubjectByIdSubject(idSubject!)
+      .deleteSubjectByIdSubject(idSubject ? idSubject : 0)
       .then(() => {
         toast.success("Matéria deletada com sucesso!", {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
         getSubjects();
       })
-      .catch((error: any) => {
+      .catch(() => {
         toast.error("Erro ao deletar, tente novamente!", {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
-        console.error(error);
       });
   };
 
@@ -83,7 +81,7 @@ const FormResponse: React.FC = () => {
     scrollUp();
     setOpenModalAll(false);
     subjectService
-      .deleteSubjectByUserId(iduser.iduser!)
+      .deleteSubjectByUserId(iduser.iduser ? iduser.iduser : 0)
       .then(() => {
         toast.success("Todas matérias foram deletadas com sucesso!", {
           position: toast.POSITION.BOTTOM_RIGHT,
@@ -91,12 +89,10 @@ const FormResponse: React.FC = () => {
 
         getSubjects();
       })
-      .catch((error: any) => {
+      .catch(() => {
         toast.error("Erro ao deletar, tente novamente!", {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
-
-        console.error(error);
       });
   };
 
@@ -104,7 +100,7 @@ const FormResponse: React.FC = () => {
     scrollUp();
     updateAppValues(arrangedReturnValues(values));
     setIduser({
-      iduser: iduser.iduser!,
+      iduser: iduser.iduser ? iduser.iduser : undefined,
       idsubject: idsubect,
     });
   };

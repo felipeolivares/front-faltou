@@ -46,7 +46,7 @@ const Form: React.FC = () => {
           .then(() => {
             updateAppValues(formik.values);
             setIduser({
-              iduser: iduser.iduser!,
+              iduser: iduser.iduser ? iduser.iduser : undefined,
               idsubject: undefined,
             });
             toast.success(
@@ -122,7 +122,7 @@ const Form: React.FC = () => {
                   size="large"
                   onClick={() => {
                     setIduser({
-                      iduser: iduser.iduser!,
+                      iduser: iduser.iduser ? iduser.iduser : undefined,
                       idsubject: undefined,
                     });
                     updateAppValues(initialValues);

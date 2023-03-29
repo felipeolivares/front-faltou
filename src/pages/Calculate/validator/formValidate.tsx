@@ -35,7 +35,10 @@ const formValidate = (values: appValues) => {
     errors.startClasses = "Data inválida";
     hasError = true;
   }
-  if (!values.amountDaysClasses || !Number(values.amountDaysClasses!)) {
+  if (
+    !values.amountDaysClasses ||
+    !Number(values.amountDaysClasses ? values.amountDaysClasses : "")
+  ) {
     errors.amountDaysClasses = "Campo obrigatório";
     hasError = true;
   }
