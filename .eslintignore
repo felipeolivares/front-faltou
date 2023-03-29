@@ -1,0 +1,14 @@
+/*.js
+dist
+node_modules
+.vscode
+coverage
+public
+*.scss
+*.css
+src/__mocks__
+*.ttf
+*.png
+*.css.map
+*.json
+*.mjs
