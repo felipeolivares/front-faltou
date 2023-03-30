@@ -156,7 +156,7 @@ const Form: React.FC = () => {
               Atenção: Informe a data exata do início da aula da matéria.
             </Typography>
           </Grid>
-          <Grid item xs={6} className="pt8">
+          <Grid item xs={12} md={6} lg={6} className="pt8">
             <DateInput
               id="startClasses"
               name="startClasses"
@@ -176,7 +176,7 @@ const Form: React.FC = () => {
               Atenção: Informe a data exata do final da aula da matéria.
             </Typography>
           </Grid>
-          <Grid item xs={6} className="pt8">
+          <Grid item xs={12} md={6} lg={6} className="pt8">
             <DateInput
               id="finishClasses"
               name="finishClasses"
@@ -196,7 +196,7 @@ const Form: React.FC = () => {
               Quantidade de dias da semana que você terá aula da matéria.
             </Typography>
           </Grid>
-          <Grid item xs={6} className="pt8">
+          <Grid item xs={12} md={6} lg={6} className="pt8">
             <TextField
               id="amountDaysClasses"
               name="amountDaysClasses"
@@ -216,7 +216,7 @@ const Form: React.FC = () => {
               Quantidade de dias que você faltou na matéria.
             </Typography>
           </Grid>
-          <Grid item xs={6} className="pt8">
+          <Grid item xs={12} md={6} lg={6} className="pt8">
             <TextField
               id="amountAbsence"
               name="amountAbsence"
@@ -247,7 +247,7 @@ const Form: React.FC = () => {
             />
           </Grid>
           {formik.values.radioholiday === "Sim" && (
-            <Grid item xs={6} className="pt8">
+            <Grid item xs={12} md={6} lg={6} className="pt8">
               <TextField
                 id="holiday"
                 name="holiday"
@@ -279,7 +279,7 @@ const Form: React.FC = () => {
             />
           </Grid>
           {formik.values.radioPct === "Não" && (
-            <Grid item xs={6} className="pt8">
+            <Grid item xs={12} md={6} lg={6} className="pt8">
               <TextField
                 id="percentage"
                 name="percentage"

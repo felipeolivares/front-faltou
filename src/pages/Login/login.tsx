@@ -101,11 +101,11 @@ const Login: React.FC = () => {
                 marginTop="8px"
                 marginLeft={isMobile() ? "" : "64px"}
               >
-                Olá, o site possuí o objetivo de ajudar você a controlar e
+                Olá, o site tem como objetivo ajudar você a controlar e
                 verificar suas faltas nas matérias, com isso você poderá saber
-                se ainda possuí frequência para organizar suas faltas. Faça o
-                login ou o cadastro para acessar a ferramenta de cálculo e
-                armazenar suas frequências.
+                se ainda possui a frequência necessária para então organizar
+                suas faltas. Faça o login ou o cadastro para acessar a
+                ferramenta de calcular e armazenar frequências.
               </Typography>
             </Box>
           </Box>
