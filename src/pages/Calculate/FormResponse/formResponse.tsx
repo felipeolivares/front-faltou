@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Paper } from "@material-ui/core";
-import { Typography, Button } from "@mui/material";
+import { Typography, Button, Skeleton } from "@mui/material";
 import useStyles from "./styles";
 import { arrangedReturnValues, isMobile } from "utils";
 import { Box, Divider } from "@mui/material";
@@ -9,7 +9,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
-import { Modal } from "components";
+import { Loading, Modal } from "components";
 import { useAppContext } from "context/useAppContext";
 import subjectService from "services/subjectService";
 import { appTotalValues } from "models/appTotalValues";
@@ -26,8 +26,10 @@ const FormResponse: React.FC = () => {
   const [subjectsDisplay, setSubjectsDisplay] = useState([]);
   const [displayCount, setDisplayCount] = useState(3);
   const [idSubject, setIdSubject] = useState(undefined);
+  const [loading, setLoading] = useState(false);
 
   const getSubjects = () => {
+    setLoading(true);
     subjectService
       .getSubjectsByIduser(iduser)
       .then((response: any) => {
@@ -40,6 +42,9 @@ const FormResponse: React.FC = () => {
             position: toast.POSITION.BOTTOM_RIGHT,
           }
         );
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -143,6 +148,7 @@ const FormResponse: React.FC = () => {
   return (
     <>
       <ToastContainer />
+      <Loading loading={loading} />
       <Modal
         open={openModal}
         title={`Você tem certeza que deseja excluir a matéria ${subjectModal}?`}
@@ -165,114 +171,120 @@ const FormResponse: React.FC = () => {
         elevation={3}
         className={isMobile() ? classes.paperCalcMob : classes.paperCalc}
       >
-        <Typography variant="h5" fontWeight="bold">
-          Matérias:
-        </Typography>
-        {subjects.length === 0 ? (
-          <Typography variant="body1" className="pt24">
-            Ainda não há matérias calculadas!
-          </Typography>
+        {loading ? (
+          <Skeleton variant="rectangular" width="100%" height="50px" />
         ) : (
           <>
-            {subjects.length > 1 && (
-              <Box className="pt24">
-                <Button
-                  id="deleteAll"
-                  color="error"
-                  variant="outlined"
-                  type="submit"
-                  size="large"
-                  onClick={() => setOpenModalAll(true)}
-                  fullWidth
-                >
-                  <Typography variant="caption" fontWeight="bold">
-                    Excluir todas as matérias
-                  </Typography>
-                </Button>
-              </Box>
-            )}
-            {subjectsDisplay.length > 0 &&
-              subjectsDisplay.map((subject: any, index: number) => (
-                <Box className={classes.box} key={index}>
-                  <Box className={classes.boxSpace}>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="#E7B10A"
+            <Typography variant="h5" fontWeight="bold">
+              Matérias:
+            </Typography>
+            {subjects.length === 0 ? (
+              <Typography variant="body1" className="pt24">
+                Ainda não há matérias calculadas!
+              </Typography>
+            ) : (
+              <>
+                {subjects.length > 1 && (
+                  <Box className="pt24">
+                    <Button
+                      id="deleteAll"
+                      color="error"
+                      variant="outlined"
+                      type="submit"
+                      size="large"
+                      onClick={() => setOpenModalAll(true)}
+                      fullWidth
                     >
-                      {subject.subjectName}
-                    </Typography>
-                    <Box className={classes.boxRow}>
-                      <EditIcon
-                        color="info"
-                        className={classes.icon}
-                        onClick={() =>
-                          updateSubject(subject, subject.idsubjects)
-                        }
-                      />
-                      <DeleteForeverIcon
-                        color="error"
-                        className={classes.icon}
-                        onClick={() => {
-                          setOpenModal(true);
-                          setSubjectModal(subject.subjectName);
-                          setIdSubject(subject.idsubjects);
-                        }}
-                      />
+                      <Typography variant="caption" fontWeight="bold">
+                        Excluir todas as matérias
+                      </Typography>
+                    </Button>
+                  </Box>
+                )}
+                {subjectsDisplay.length > 0 &&
+                  subjectsDisplay.map((subject: any, index: number) => (
+                    <Box className={classes.box} key={index}>
+                      <Box className={classes.boxSpace}>
+                        <Typography
+                          variant="body1"
+                          fontWeight="bold"
+                          color="#E7B10A"
+                        >
+                          {subject.subjectName}
+                        </Typography>
+                        <Box className={classes.boxRow}>
+                          <EditIcon
+                            color="info"
+                            className={classes.icon}
+                            onClick={() =>
+                              updateSubject(subject, subject.idsubjects)
+                            }
+                          />
+                          <DeleteForeverIcon
+                            color="error"
+                            className={classes.icon}
+                            onClick={() => {
+                              setOpenModal(true);
+                              setSubjectModal(subject.subjectName);
+                              setIdSubject(subject.idsubjects);
+                            }}
+                          />
+                        </Box>
+                      </Box>
+                      <Divider />
+                      <Box className={classes.boxSpace} paddingTop="16px">
+                        <Typography variant="body1" fontWeight="bold">
+                          Posso faltar?
+                        </Typography>
+                        {returnAbsence(subject.totalAbsenceStudent)}
+                      </Box>
+                      <Divider />
+                      <Box className={classes.boxSpace} paddingTop="16px">
+                        <Typography variant="body1" fontWeight="bold">
+                          Quantidade de aulas
+                        </Typography>
+                        <Typography variant="body1">
+                          {subject.totalClasses}
+                        </Typography>
+                      </Box>
+                      <Divider />
+                      <Box className={classes.boxSpace} paddingTop="16px">
+                        <Typography variant="body1" fontWeight="bold">
+                          Quantidade de faltas possíveis da matéria
+                        </Typography>
+                        <Typography variant="body1">
+                          {subject.totalAbsence}
+                        </Typography>
+                      </Box>
+                      <Divider />
+                      <Box className={classes.boxSpace} paddingTop="16px">
+                        <Typography variant="body1" fontWeight="bold">
+                          Quantidade de faltas
+                        </Typography>
+                        <Typography variant="body1">
+                          {subject.amountAbsence}
+                        </Typography>
+                      </Box>
                     </Box>
+                  ))}
+                {displayCount < subjects.length && (
+                  <Box marginTop="16px">
+                    <Button
+                      id="seeMore"
+                      color="primary"
+                      variant="outlined"
+                      type="submit"
+                      size="large"
+                      onClick={() => setDisplayCount(displayCount + 3)}
+                      fullWidth
+                    >
+                      <Typography variant="caption" fontWeight="bold">
+                        Ver mais
+                      </Typography>
+                    </Button>
                   </Box>
-                  <Divider />
-                  <Box className={classes.boxSpace} paddingTop="16px">
-                    <Typography variant="body1" fontWeight="bold">
-                      Posso faltar?
-                    </Typography>
-                    {returnAbsence(subject.totalAbsenceStudent)}
-                  </Box>
-                  <Divider />
-                  <Box className={classes.boxSpace} paddingTop="16px">
-                    <Typography variant="body1" fontWeight="bold">
-                      Quantidade de aulas
-                    </Typography>
-                    <Typography variant="body1">
-                      {subject.totalClasses}
-                    </Typography>
-                  </Box>
-                  <Divider />
-                  <Box className={classes.boxSpace} paddingTop="16px">
-                    <Typography variant="body1" fontWeight="bold">
-                      Quantidade de faltas possíveis da matéria
-                    </Typography>
-                    <Typography variant="body1">
-                      {subject.totalAbsence}
-                    </Typography>
-                  </Box>
-                  <Divider />
-                  <Box className={classes.boxSpace} paddingTop="16px">
-                    <Typography variant="body1" fontWeight="bold">
-                      Quantidade de faltas
-                    </Typography>
-                    <Typography variant="body1">
-                      {subject.amountAbsence}
-                    </Typography>
-                  </Box>
-                </Box>
-              ))}
-            {displayCount < subjects.length && (
-              <Box marginTop="16px">
-                <Button
-                  id="seeMore"
-                  color="primary"
-                  variant="outlined"
-                  type="submit"
-                  size="large"
-                  onClick={() => setDisplayCount(displayCount + 3)}
-                  fullWidth
-                >
-                  <Typography variant="caption" fontWeight="bold">
-                    Ver mais
-                  </Typography>
-                </Button>
-              </Box>
+                )}
+              </>
             )}
           </>
         )}
