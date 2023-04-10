@@ -31,7 +31,7 @@ const Support: React.FC = () => {
             paddingRight="4px"
             paddingLeft="8px"
           >
-            E-mail para contatos:
+            E-mail:
           </Typography>
           <Typography variant="body1">felipeolivares99@hotmail.com</Typography>
         </Box>
