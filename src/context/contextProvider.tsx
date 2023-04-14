@@ -1,7 +1,7 @@
 import { createContext, useState, useCallback, ReactNode } from "react";
 import { appValues } from "models/appValues";
 import { idUsers } from "models/idUsers";
-import initialValues from "helpers/initialValues";
+import initialValues from "../helpers/initialValues";
 
 type ValuesAppContextType = {
   appValues: appValues;
