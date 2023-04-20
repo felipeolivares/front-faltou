@@ -6,7 +6,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useNavigate, useLocation } from "react-router-dom";
-import routes from "routes/routes";
+import routes from "../../routes/routes";
 
 const Header: React.FC = () => {
   const classes = useStyles();

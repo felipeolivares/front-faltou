@@ -2,15 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Grid, Paper } from "@material-ui/core";
 import { TextField, Typography, Button, InputAdornment } from "@mui/material";
 import useStyles from "./styles";
-import { DateInput, Loading, MLRadio } from "components";
-import { useAppContext } from "context/useAppContext";
+import { DateInput, Loading, MLRadio } from "../../../components";
+import { useAppContext } from "../../../context/useAppContext";
 import { useFormik } from "formik";
-import { allowNumbersOnly, arrangedSendValues, minAndMaxValue } from "utils";
+import {
+  allowNumbersOnly,
+  arrangedSendValues,
+  minAndMaxValue,
+} from "../../../utils";
 import formValidate from "../validator/formValidate";
-import subjectService from "services/subjectService";
+import subjectService from "../../../services/subjectService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import initialValues from "helpers/initialValues";
+import initialValues from "../../../helpers/initialValues";
 
 const Form: React.FC = () => {
   const classes = useStyles();

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Grid } from "@material-ui/core";
-import { isMobile } from "utils";
-import Header from "pages/Header/header";
+import { isMobile } from "../../utils";
+import Header from "../../pages/Header/header";
 import Form from "./Form/form";
 import FormResponse from "./FormResponse/formResponse";
 

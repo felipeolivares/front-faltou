@@ -1,5 +1,5 @@
-import { appValues } from "models/appValues";
-import { isDateInvalid } from "utils";
+import { appValues } from "../../../models/appValues";
+import { isDateInvalid } from "../../../utils";
 
 const formValidate = (values: appValues) => {
   let hasError = false;
