@@ -9,16 +9,16 @@ import {
   IconButton,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import routes from "routes/routes";
-import logo from "assets/Logo.png";
+import routes from "../../routes/routes";
+import logo from "../../assets/Logo.png";
 import useStyles from "../styles";
 import { useFormik } from "formik";
-import loginService from "services/loginService";
+import loginService from "../../services/loginService";
 import { VisibilityOff, Visibility } from "@material-ui/icons";
-import { isMobile } from "utils";
-import { useAppContext } from "context/useAppContext";
-import { Loading } from "components";
-import initialValues from "helpers/initialValues";
+import { isMobile } from "../../utils";
+import { useAppContext } from "../../context/useAppContext";
+import { Loading } from "../../components";
+import initialValues from "../../helpers/initialValues";
 
 const Login: React.FC = () => {
   const classes = useStyles();
@@ -131,11 +131,11 @@ const Login: React.FC = () => {
                 <TextField
                   id="email"
                   name="email"
-                  value={formik.values.email}
+                  value={formik.values?.email}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  error={!!formik.errors.email}
-                  helperText={formik.errors.email}
+                  error={!!formik.errors?.email}
+                  helperText={formik.errors?.email}
                   label="Informe seu e-mail"
                   placeholder="Informe seu e-mail"
                   autoComplete="off"
@@ -146,11 +146,11 @@ const Login: React.FC = () => {
                 <TextField
                   id="password"
                   name="password"
-                  value={formik.values.password}
+                  value={formik.values?.password}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  error={!!formik.errors.password}
-                  helperText={formik.errors.password}
+                  error={!!formik.errors?.password}
+                  helperText={formik.errors?.password}
                   label="Informe sua senha"
                   placeholder="Informe sua senha"
                   autoComplete="off"

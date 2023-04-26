@@ -10,13 +10,13 @@ import {
 } from "@mui/material";
 import { VisibilityOff, Visibility } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
-import routes from "routes/routes";
-import logo from "assets/Logo.png";
+import routes from "../../routes/routes";
+import logo from "../../assets/Logo.png";
 import { useFormik } from "formik";
 import useStyles from "../styles";
-import loginService from "services/loginService";
+import loginService from "../../services/loginService";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { Loading } from "components";
+import { Loading } from "../../components";
 
 const Register: React.FC = () => {
   const classes = useStyles();
@@ -96,11 +96,11 @@ const Register: React.FC = () => {
             <TextField
               id="email"
               name="email"
-              value={formik.values.email}
+              value={formik.values?.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              error={!!formik.errors.email}
-              helperText={formik.errors.email}
+              error={!!formik.errors?.email}
+              helperText={formik.errors?.email}
               label="Informe seu e-mail"
               placeholder="Informe seu e-mail"
               autoComplete="off"
@@ -111,11 +111,11 @@ const Register: React.FC = () => {
             <TextField
               id="password"
               name="password"
-              value={formik.values.password}
+              value={formik.values?.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              error={!!formik.errors.password}
-              helperText={formik.errors.password}
+              error={!!formik.errors?.password}
+              helperText={formik.errors?.password}
               label="Informe sua senha"
               placeholder="Informe sua senha"
               autoComplete="off"
@@ -141,11 +141,11 @@ const Register: React.FC = () => {
             <TextField
               id="confirmPassword"
               name="confirmPassword"
-              value={formik.values.confirmPassword}
+              value={formik.values?.confirmPassword}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              error={!!formik.errors.confirmPassword}
-              helperText={formik.errors.confirmPassword}
+              error={!!formik.errors?.confirmPassword}
+              helperText={formik.errors?.confirmPassword}
               label="Confirme sua senha"
               placeholder="Confirme sua senha"
               autoComplete="off"
