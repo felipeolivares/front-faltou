@@ -89,7 +89,7 @@ const Register: React.FC = () => {
           <Box className={classes.loginMsg}>
             <img className={classes.containerImage} alt="iconPlus" src={logo} />
             <Typography variant="h4" fontWeight="bold">
-              Suporte
+              Cadastro
             </Typography>
           </Box>
           <Box className="pt16">
